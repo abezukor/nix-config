@@ -1,0 +1,1 @@
+This uses a bit of a hack to make it work across both x86 and arm. Essentially this repo should be closed nested in a directory called home-manager-repo inside `~/.config/home-manager`, and outside of that directory, there should be a symlink to flake.nix, and  an arch.nix symlink to the correct architecture.

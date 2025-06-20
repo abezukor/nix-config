@@ -15,7 +15,7 @@
     {
       homeConfigurations = {
         abe = let 
-          currentSystem = "aarch64-linux";
+          currentSystem = import ../arch.nix;
         in
           home-manager.lib.homeManagerConfiguration {
             pkgs = nixpkgs.legacyPackages.${currentSystem};
