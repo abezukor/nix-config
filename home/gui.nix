@@ -1,6 +1,9 @@
 { pkgs-unstable, ... }: {
   home = {
-    packages = [ pkgs-unstable.zed-editor ];
+    packages = [
+      pkgs-unstable.zed-editor
+      pkgs-unstable.package-version-server
+    ];
 
     # You do not need to change this if you're reading this in the future.
     # Don't ever change this after the first build.  Don't ask questions.
