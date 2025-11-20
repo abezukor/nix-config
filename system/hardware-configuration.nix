@@ -32,6 +32,11 @@
       fsType = "btrfs";
       options = [ "subvol=nix_subvol" "compress=zstd" "noatime" ];
     };
+  fileSystems."/var/cache" =
+    { device = "/dev/disk/by-uuid/2423e497-c1c8-4742-9b03-d91bb6b5e645";
+      fsType = "ext4";
+      options = [ "noatime" "nodiratime" "discard" "data=writeback" ];
+    };
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/1E65-73E7";

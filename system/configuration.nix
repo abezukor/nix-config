@@ -5,10 +5,9 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -28,10 +27,9 @@
     networkConfig = {
       DHCP = "ipv4";
       UseDomains = true;
+      DNS = "192.168.64.10";
     };
-
   };
-
 
   time.timeZone = "America/Los_Angeles";
 
@@ -54,9 +52,13 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.abe = {
-     isNormalUser = true;
-     extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
-     shell = pkgs.zsh;
+    isNormalUser = true;
+    extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
+    shell = pkgs.zsh;
+  };
+  fileSystems."/home/abe/.cache" = {
+    device = "/var/cache/home/abe/.cache";
+    options = [ "bind" ];
   };
 
   # List packages installed in system profile.
@@ -65,6 +67,7 @@
     home-manager
     wayland-utils
     wget
+    smartmontools
   ];
   programs.zsh.enable = true;
 
@@ -94,8 +97,10 @@
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
   # system.copySystemConfiguration = true;
-  
+
   virtualisation.docker.enable = true;
+  services.fwupd.enable = true;
+  services.flatpak.enable = true;
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   #
@@ -116,4 +121,3 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
 }
-
