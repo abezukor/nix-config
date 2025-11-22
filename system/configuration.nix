@@ -29,6 +29,7 @@
       UseDomains = true;
       DNS = "192.168.64.10";
     };
+    dhcpV4Config = { UseDNS = false; };
   };
 
   time.timeZone = "America/Los_Angeles";
