@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home = {
     packages = with pkgs; [ slack ];
 
@@ -7,7 +8,7 @@
         text = ''
           {
               "environment": [
-                  "HISTFILE=/home/maticd/mdk_shared/bash_history"
+                  "ZDOTDIR=/home/maticd/mdk_shared/zshdotdir"
               ],
               "volumes": [
                   "/var/cache/home/maticd/.cache:/home/maticd/.cache",
