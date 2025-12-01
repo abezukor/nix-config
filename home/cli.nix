@@ -1,6 +1,14 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home = {
-    packages = with pkgs; [ zsh git htop eza nixd nixfmt ];
+    packages = with pkgs; [
+      zsh
+      git
+      htop
+      eza
+      nixd
+      nixfmt
+    ];
 
     username = "abe";
     homeDirectory = "/home/abe";
@@ -24,6 +32,8 @@
 
     shellAliases = {
       ls = "eza -lh";
+      rsyncf = "rsync -zhPLa";
+      # Nix Aliases
       nfu = "sudo nixos-rebuild --flake /etc/nixos switch";
       hmfu = "home-manager switch --flake ~/.config/home-manager#$(hostname)";
     };
@@ -33,6 +43,21 @@
       enable = true;
       plugins = [ "git" ];
       theme = "agnoster";
+    };
+  };
+
+  programs.mergiraf.enable = true;
+
+  programs.ssh = {
+    enable = true;
+    enableDefaultConfig = false;
+    matchBlocks = {
+      "*" = {
+        forwardAgent = true;
+        addKeysToAgent = "yes";
+        serverAliveInterval = 3;
+        hashKnownHosts = false;
+      };
     };
   };
 }
