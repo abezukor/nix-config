@@ -54,7 +54,11 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.abe = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "docker"
+      "libvirtd"
+    ]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh;
   };
   fileSystems."/home/abe/.cache" = {
@@ -71,6 +75,7 @@
     smartmontools
   ];
   programs.zsh.enable = true;
+  programs.virt-manager.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -100,6 +105,7 @@
   # system.copySystemConfiguration = true;
 
   virtualisation.docker.enable = true;
+  virtualisation.libvirtd.enable = true;
   services.fwupd.enable = true;
   services.flatpak.enable = true;
   # This option defines the first version of NixOS you have installed on this particular machine,
