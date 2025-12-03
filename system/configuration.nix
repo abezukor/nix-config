@@ -29,7 +29,9 @@
       UseDomains = true;
       DNS = "192.168.64.10";
     };
-    dhcpV4Config = { UseDNS = false; };
+    dhcpV4Config = {
+      UseDNS = false;
+    };
   };
 
   time.timeZone = "America/Los_Angeles";
@@ -97,7 +99,7 @@
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = false;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
