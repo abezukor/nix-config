@@ -8,6 +8,11 @@
       eza
       nixd
       nixfmt
+      tmux
+      bat
+      eza
+      tio
+      xxd
     ];
 
     username = "abe";
@@ -31,11 +36,12 @@
     syntaxHighlighting.enable = true;
 
     shellAliases = {
-      ls = "eza -lh";
       rsyncf = "rsync -zhPLa";
       # Nix Aliases
       nfu = "sudo nixos-rebuild --flake /etc/nixos switch";
       hmfu = "home-manager switch --flake ~/.config/home-manager#$(hostname)";
+      cat = "bat";
+      ls = "eza -lh";
     };
     history.size = 10000;
 
