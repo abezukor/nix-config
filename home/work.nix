@@ -26,7 +26,12 @@
   };
   nixpkgs.config.allowUnfree = true;
 
-  programs.ssh.matchBlocks."matic-*" = {
-    user = "root";
+  programs.ssh.matchBlocks = {
+    "matic-* fuji-*" = {
+      user = "root";
+    };
+    "zeus ci* bigloo" = {
+      user = "admin";
+    };
   };
 }
