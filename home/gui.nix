@@ -1,7 +1,12 @@
-{ pkgs-unstable, ... }: {
+{ pkgs-unstable, ... }:
+let
+  starplsPath = "${pkgs-unstable.starpls}/bin/starpls";
+in
+{
   home = {
     packages = [
-      pkgs-unstable.zed-editor
+      # For Zed
+      pkgs-unstable.starpls
       pkgs-unstable.package-version-server
     ];
 
@@ -10,5 +15,22 @@
     stateVersion = "25.05";
   };
 
-  programs.firefox = { enable = true; };
+  programs.firefox = {
+    enable = true;
+  };
+
+  programs.zed-editor = {
+    enable = true;
+
+    userSettings = {
+      # Other settings...
+      lsp = {
+        starpls = {
+          binary = {
+            path = starplsPath;
+          };
+        };
+      };
+    };
+  };
 }
