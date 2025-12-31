@@ -7,6 +7,10 @@
       ".config/mdk/mdk.json" = {
         text = ''
           {
+              "options": [
+                  "--tmpfs",
+                  "/tmp:rw,nosuid,nodev,exec,size=64g,mode=777"
+              ],
               "environment": [
                   "ZDOTDIR=/home/maticd/mdk_shared/zshdotdir"
               ],
