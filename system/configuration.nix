@@ -27,6 +27,16 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.initrd.systemd = {
+    enable = true;
+    # Override the cryptsetup service to add timeout and auto-poweroff
+    services."systemd-cryptsetup@" = {
+      overrideStrategy = "asDropin";
+      serviceConfig.TimeoutSec = 300; # 5 minutes
+      unitConfig.FailureAction = "poweroff-force";
+    };
+  };
+
   boot.binfmt.emulatedSystems = [
     "aarch64-linux"
   ];
