@@ -1,4 +1,4 @@
-{ pkgs-unstable, ... }:
+{ lib, pkgs-unstable, ... }:
 let
   starplsPath = "${pkgs-unstable.starpls}/bin/starpls";
 in
@@ -8,6 +8,8 @@ in
       # For Zed
       pkgs-unstable.starpls
       pkgs-unstable.package-version-server
+      # needed for claude code in zed
+      pkgs-unstable.nodejs_24
     ];
 
     # You do not need to change this if you're reading this in the future.
@@ -33,6 +35,10 @@ in
         };
       };
 
+      node = {
+        path = lib.getExe pkgs-unstable.nodejs;
+        npm_path = lib.getExe' pkgs-unstable.nodejs "npm";
+      };
     };
   };
 }
