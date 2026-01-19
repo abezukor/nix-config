@@ -23,7 +23,8 @@ in
     enable = true;
 
     userSettings = {
-      # Other settings...
+      soft_wrap = "editor_width";
+
       lsp = {
         starpls = {
           binary = {
@@ -31,6 +32,7 @@ in
           };
         };
       };
+
     };
   };
 }
