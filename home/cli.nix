@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, pkgs-unstable, ... }:
 {
   home = {
     packages = with pkgs; [
@@ -13,6 +13,8 @@
       eza
       tio
       xxd
+      usbutils
+      pkgs-unstable.claude-code
     ];
 
     username = "abe";

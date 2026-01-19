@@ -17,8 +17,12 @@
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
-      pkgs-unstable = import nixpkgs-unstable { inherit system; };
-    in {
+      pkgs-unstable = import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
+    in
+    {
       homeConfigurations = {
         abeMaticDesktop = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
