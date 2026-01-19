@@ -27,7 +27,11 @@
         abeMaticDesktop = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit pkgs-unstable; };
-          modules = [ ./cli.nix ./gui.nix ./work.nix ];
+          modules = [
+            ./cli.nix
+            ./gui.nix
+            ./work.nix
+          ];
         };
       };
     };
