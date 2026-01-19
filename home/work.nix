@@ -31,6 +31,11 @@
   nixpkgs.config.allowUnfree = true;
 
   programs.ssh.matchBlocks = {
+    "*" = {
+      extraOptions = {
+        StrictHostKeyChecking = "no";
+      };
+    };
     "matic-* fuji-*" = {
       user = "root";
     };
