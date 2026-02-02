@@ -54,6 +54,11 @@
     };
   };
 
+  programs.htop.settings = {
+    hide_kernel_threads = true;
+    hide_userland_threads = true;
+  };
+
   programs.mergiraf.enable = true;
 
   programs.ssh = {
