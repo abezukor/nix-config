@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home = {
-    packages = with pkgs; [ slack ];
+    packages = with pkgs; [ slack moonlight-qt ];
 
     file = {
       ".config/mdk/mdk.json" = {
