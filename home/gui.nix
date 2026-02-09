@@ -1,4 +1,9 @@
-{ lib, pkgs-unstable, ... }:
+{
+  lib,
+  pkgs,
+  pkgs-unstable,
+  ...
+}:
 let
   starplsPath = "${pkgs-unstable.starpls}/bin/starpls";
 in
@@ -10,6 +15,7 @@ in
       pkgs-unstable.package-version-server
       # needed for claude code in zed
       pkgs-unstable.nodejs_24
+      pkgs-unstable.qdirstat
     ];
 
     # You do not need to change this if you're reading this in the future.
