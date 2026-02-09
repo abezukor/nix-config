@@ -94,6 +94,7 @@
       "wheel"
       "docker"
       "libvirtd"
+      "adbusers"
     ]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh;
   };

@@ -12,4 +12,5 @@
     };
     linkConfig.RequiredForOnline = "no";
   };
+  programs.adb.enable = true;
 }
