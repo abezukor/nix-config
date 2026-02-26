@@ -97,6 +97,7 @@
       "adbusers"
     ]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh;
+    #shell = pkgs.nushell;
   };
   fileSystems."/home/abe/.cache" = {
     device = "/var/cache/home/abe/.cache";
