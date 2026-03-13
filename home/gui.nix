@@ -29,6 +29,11 @@ in
 
   programs.zed-editor = {
     enable = true;
+    package = pkgs-unstable.zed-editor.overrideAttrs (old: {
+      env = old.env // {
+        RUSTFLAGS = (old.env.RUSTFLAGS or "") + " -C target-cpu=native";
+      };
+    });
 
     userSettings = {
       soft_wrap = "editor_width";
@@ -42,8 +47,8 @@ in
       };
 
       node = {
-        path = lib.getExe pkgs-unstable.nodejs;
-        npm_path = lib.getExe' pkgs-unstable.nodejs "npm";
+        path = lib.getExe pkgs-unstable.nodejs_24;
+        npm_path = lib.getExe' pkgs-unstable.nodejs_24 "npm";
       };
     };
   };
