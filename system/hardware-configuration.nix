@@ -14,7 +14,7 @@
       kernelModules = [ ];
     };
     kernelModules = [ "kvm-amd" ];
-    kernelParams = [ "usbcore.autosuspend=-1" ];
+    kernelParams = [ "xhci_hcd.quirks=537919616" ];
     extraModulePackages = [ ];
   };
 
