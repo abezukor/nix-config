@@ -25,7 +25,8 @@
   };
 
   # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # Nvidia drivers did not work with latest kernel, so switching to lts
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.initrd.systemd = {
     enable = true;
@@ -112,6 +113,7 @@
     wget
     smartmontools
   ];
+  programs.kdeconnect.enable = true;
   programs.zsh.enable = true;
   programs.virt-manager.enable = true;
 
@@ -124,7 +126,12 @@
   # };
 
   # List services that you want to enable:
-  services.avahi.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    #reflector = true;
+  };
+
   services.resolved = {
     extraConfig = ''
       MulticastDNS=no
@@ -136,6 +143,7 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
+  #networking.nftables.enable = true;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
@@ -144,6 +152,7 @@
 
   virtualisation.docker.enable = true;
   virtualisation.libvirtd.enable = true;
+  #virtualisation.waydroid.enable = true;
   services.fwupd.enable = true;
   services.flatpak.enable = true;
   # This option defines the first version of NixOS you have installed on this particular machine,
