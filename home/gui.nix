@@ -16,6 +16,7 @@ in
       # needed for claude code in zed
       pkgs-unstable.nodejs_24
       pkgs-unstable.qdirstat
+      pkgs.libreoffice
     ];
 
     # You do not need to change this if you're reading this in the future.
@@ -29,11 +30,7 @@ in
 
   programs.zed-editor = {
     enable = true;
-    package = pkgs-unstable.zed-editor.overrideAttrs (old: {
-      env = old.env // {
-        RUSTFLAGS = (old.env.RUSTFLAGS or "") + " -C target-cpu=native";
-      };
-    });
+    package = pkgs-unstable.zed-editor;
 
     userSettings = {
       soft_wrap = "editor_width";
