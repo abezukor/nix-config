@@ -62,7 +62,7 @@
     networkConfig = {
       DHCP = "ipv4";
       UseDomains = true;
-      DNS = "192.168.64.10";
+      DNS = "100.100.100.100";
     };
     dhcpV4Config = {
       UseDNS = false;
