@@ -6,6 +6,19 @@
 }:
 let
   starplsPath = "${pkgs-unstable.starpls}/bin/starpls";
+  # Wrap LibreOffice to always launch with the Light GTK theme
+  # Dark theme libreoffice seems to break the buttons
+  libreoffice-light = pkgs.symlinkJoin {
+    name = "libreoffice-light";
+    paths = [ pkgs.libreoffice ];
+    buildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/libreoffice \
+        --set SAL_USE_VCLPLUGIN gtk3 \
+        --set GTK_THEME Adwaita:light \
+        --set GDK_BACKEND x11
+    '';
+  };
 in
 {
   home = {
@@ -16,7 +29,7 @@ in
       # needed for claude code in zed
       pkgs-unstable.nodejs_24
       pkgs-unstable.qdirstat
-      pkgs.libreoffice
+      libreoffice-light
     ];
 
     # You do not need to change this if you're reading this in the future.
