@@ -5,7 +5,7 @@
 
 {
   systemd.network.networks."21-debug-dongle" = {
-    matchConfig.Property = "TAGS=*matic_debug_dongle*";
+    matchConfig.Property = "TAGS=*matic_*";
     networkConfig = {
       DHCP = "no";
       LinkLocalAddressing = "yes";
