@@ -54,6 +54,13 @@ in
             path = starplsPath;
           };
         };
+        "rust-analyzer" = {
+          initialization_options = {
+            check = {
+              command = "clippy";
+            };
+          };
+        };
       };
 
       node = {
