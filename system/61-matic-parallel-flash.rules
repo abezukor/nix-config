@@ -1,0 +1,9 @@
+SUBSYSTEM=="usb", ACTION!="remove",  ATTRS{idVendor}=="0955", ATTRS{idProduct}=="7623", DRIVER=="usb", MODE="0660", TAG+="uaccess", TAG+="nvidia_rcm_interface"
+
+# Using Ifindex as opposed to serial number as interface names have 13 character limit
+# %n cannot be used here as all of the network interfaces have kernel number 0
+# All of the network interfaces need to have a consistent name to allow ignoring them by networkmanager.
+SUBSYSTEM=="net", ATTRS{idVendor}=="0955", ATTRS{idProduct}=="7035", NAME="matic_$attr{ifindex}", TAG+="matic_flash_interface", ENV{ID_NET_AUTO_LINK_LOCAL_ONLY}="1", ENV{NM_AUTO_DEFAULT_LINK_LOCAL_ONLY}="1"
+
+#Udisks auto mounting seems to mess up the flashing process and cause bots to no longer boot
+SUBSYSTEM=="block", SUBSYSTEMS=="usb", ATTRS{idVendor}=="0955", ATTRS{idProduct}=="7035", ENV{UDISKS_IGNORE}="1"

@@ -1,0 +1,9 @@
+#Prefixed with 60 to overwrite os defaults for serial devices (usually 50).
+
+
+#CP210x Debug Dongles
+SUBSYSTEM=="gpio", ACTION!="remove", SUBSYSTEMS=="usb", DRIVERS=="cp210x", MODE="0660", TAG+="uaccess"
+SUBSYSTEM=="tty", ACTION!="remove", SUBSYSTEMS=="usb", DRIVERS=="cp210x", MODE="0660", TAG+="uaccess"
+SUBSYSTEM=="net", ACTION!="remove", SUBSYSTEMS=="usb", ATTRS{idVendor}=="0525", ATTRS{idProduct}=="a4a1", TAG+="matic_debug_dongle", ENV{ID_NET_AUTO_LINK_LOCAL_ONLY}="1", ENV{NM_AUTO_DEFAULT_LINK_LOCAL_ONLY}="1"
+
+SUBSYSTEM=="gpio", ACTION!="remove", DRIVERS=="mcp2221", MODE="0660", TAG+="uaccess" TAG+="matic_mcp2221_debug_dongle"
