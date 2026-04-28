@@ -1,4 +1,9 @@
-{ pkgs, pkgs-unstable, config, ... }:
+{
+  pkgs,
+  pkgs-unstable,
+  config,
+  ...
+}:
 {
   home = {
     packages = with pkgs; [
@@ -14,11 +19,19 @@
       tio
       xxd
       usbutils
-      pkgs-unstable.claude-code
+      claude-code
+      sccache
     ];
 
     username = "abe";
     homeDirectory = "/home/abe";
+
+    sessionVariables = {
+      RUSTC_WRAPPER = "sccache";
+      SCCACHE_DIR = "${config.home.homeDirectory}/.cache/sccache";
+      SCCACHE_CACHE_SIZE = "300G";
+      SCCACHE_SERVER_UDS = "$XDG_RUNTIME_DIR/sccache.sock";
+    };
 
     # You do not need to change this if you're reading this in the future.
     # Don't ever change this after the first build.  Don't ask questions.
