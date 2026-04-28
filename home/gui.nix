@@ -27,10 +27,14 @@ in
       pkgs-unstable.starpls
       pkgs-unstable.package-version-server
       # needed for claude code in zed
-      pkgs-unstable.nodejs_24
+      pkgs-unstable.nodejs_22
       pkgs-unstable.qdirstat
       libreoffice-light
     ];
+
+    # Tell the Zed-bundled claude-agent-sdk to use the Nix-installed claude
+    # binary instead of its own dynamically-linked one (which can't run on NixOS).
+    sessionVariables.CLAUDE_CODE_EXECUTABLE = lib.getExe pkgs-unstable.claude-code;
 
     # You do not need to change this if you're reading this in the future.
     # Don't ever change this after the first build.  Don't ask questions.
@@ -48,6 +52,10 @@ in
     userSettings = {
       soft_wrap = "editor_width";
 
+      agent_servers = {
+        claude = {};
+      };
+
       lsp = {
         starpls = {
           binary = {
@@ -64,8 +72,8 @@ in
       };
 
       node = {
-        path = lib.getExe pkgs-unstable.nodejs_24;
-        npm_path = lib.getExe' pkgs-unstable.nodejs_24 "npm";
+        path = lib.getExe pkgs-unstable.nodejs_22;
+        npm_path = lib.getExe' pkgs-unstable.nodejs_22 "npm";
       };
     };
   };
