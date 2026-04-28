@@ -59,5 +59,6 @@
     mdke = "docker exec -it mdk_home_abe_matic";
     mdk_bzl = "docker exec -it mdk_home_abe_matic ./tools/bazel";
     mdk_bzl_bot = "docker exec -it mdk_home_abe_matic ./tools/bazel build -c opt --config=jetson_orin";
+    dd_ssh = "(cd ~/matic/rust && cargo run --release --example=debug_conn_v3 -- fuji ssh)";
   };
 }
