@@ -29,7 +29,10 @@ in
       # needed for claude code in zed
       pkgs-unstable.nodejs_22
       pkgs-unstable.qdirstat
+      # For Libreoffice
       libreoffice-light
+      pkgs.hunspell
+      pkgs.hunspellDicts.en_US-large
     ];
 
     # Tell the Zed-bundled claude-agent-sdk to use the Nix-installed claude
@@ -53,7 +56,7 @@ in
       soft_wrap = "editor_width";
 
       agent_servers = {
-        claude = {};
+        claude = { };
       };
 
       lsp = {
