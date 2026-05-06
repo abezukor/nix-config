@@ -1,12 +1,18 @@
 # to /etc/nixos/configuration.nix instead.
 {
+  pkgs,
   ...
 }:
 
+let
+  maticUdevRules = pkgs.runCommand "matic-udev-rules" { } ''
+    mkdir -p $out/etc/udev/rules.d
+    cp ${./60-matic-debug-conn.rules} $out/etc/udev/rules.d/60-matic-debug-conn.rules
+    cp ${./61-matic-parallel-flash.rules} $out/etc/udev/rules.d/61-matic-parallel-flash.rules
+  '';
+in
 {
-  services.udev.extraRules =
-    builtins.readFile ./60-matic-debug-conn.rules
-    + builtins.readFile ./61-matic-parallel-flash.rules;
+  services.udev.packages = [ maticUdevRules ];
 
   systemd.network.networks."21-debug-dongle" = {
     matchConfig.Property = "TAGS=*matic_*";
