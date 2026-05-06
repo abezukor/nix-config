@@ -58,6 +58,7 @@
       hmfu = "home-manager switch --flake ~/.config/home-manager#$(hostname)";
       cat = "bat";
       ls = "eza -lh";
+      nix-shell = "nix-shell --run $SHELL";
     };
     history.size = 10000;
 
