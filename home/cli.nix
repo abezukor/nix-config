@@ -141,4 +141,8 @@
     };
   };
   services.ssh-agent.enable = true;
+
+  programs.atuin = {
+    enable = true;
+  };
 }
