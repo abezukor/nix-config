@@ -42,7 +42,6 @@
     "aarch64-linux"
   ];
 
-  nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
@@ -70,23 +69,6 @@
 
   time.timeZone = "America/Los_Angeles";
 
-  services.desktopManager.plasma6.enable = true;
-
-  services.displayManager.sddm.enable = true;
-
-  services.displayManager.sddm.wayland.enable = true;
-
-  # Enable sound.
-  # services.pulseaudio.enable = true;
-  # OR
-  # services.pipewire = {
-  #   enable = true;
-  #   pulse.enable = true;
-  # };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.libinput.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.abe = {
     isNormalUser = true;
@@ -99,6 +81,7 @@
     shell = pkgs.zsh;
     #shell = pkgs.nushell;
   };
+
   fileSystems."/home/abe/.cache" = {
     device = "/var/cache/home/abe/.cache";
     options = [ "bind" ];
@@ -143,6 +126,17 @@
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
   #networking.nftables.enable = true;
+
+  hardware.graphics.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia = {
+    open = true;
+    powerManagement.enable = true;
+  };
+
+  hardware.graphics.enable32Bit = true;
+  virtualisation.docker.enableNvidia = true;
+  hardware.nvidia-container-toolkit.enable = true;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
