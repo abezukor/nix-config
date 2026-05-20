@@ -6,6 +6,7 @@
 }:
 let
   starplsPath = "${pkgs-unstable.starpls}/bin/starpls";
+  toml = pkgs.formats.toml { };
   # Wrap LibreOffice to always launch with the Light GTK theme
   # Dark theme libreoffice seems to break the buttons
   libreoffice-light = pkgs.symlinkJoin {
@@ -24,6 +25,8 @@ in
   home = {
     packages = [
       # For Zed
+      # Run Zed's Codex ACP adapter natively on NixOS (avoid Zed-downloaded dynamic binaries).
+      pkgs.codex-acp
       pkgs-unstable.starpls
       pkgs-unstable.package-version-server
       # needed for claude code in zed
@@ -38,6 +41,13 @@ in
     # Tell the Zed-bundled claude-agent-sdk to use the Nix-installed claude
     # binary instead of its own dynamically-linked one (which can't run on NixOS).
     sessionVariables.CLAUDE_CODE_EXECUTABLE = lib.getExe pkgs-unstable.claude-code;
+
+    file = {
+      ".codex/config.toml".source = toml.generate "codex-config.toml" {
+        approval_policy = "on-request";
+        sandbox_mode = "danger-full-access";
+      };
+    };
 
     # You do not need to change this if you're reading this in the future.
     # Don't ever change this after the first build.  Don't ask questions.
@@ -57,6 +67,12 @@ in
 
       agent_servers = {
         claude = { };
+        "codex-acp" = {
+          type = "custom";
+          command = lib.getExe pkgs.codex-acp;
+          args = [ ];
+          default_model = "gpt-5.2";
+        };
       };
 
       lsp = {
