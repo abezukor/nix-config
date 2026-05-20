@@ -37,8 +37,10 @@
     };
 
   fileSystems."/mnt/hdd" =
-    { device = "/dev/sdb";
+    { device = "/dev/disk/by-uuid/dfcca0d8-60e7-436a-8470-98a8b61b40ae";
       fsType = "btrfs";
+      # Fail the boot if it can't be mounted, but allow some time for disks to appear.
+      options = [ "x-systemd.device-timeout=60" ];
     };
 
   swapDevices = [ ];
