@@ -42,6 +42,10 @@
   ];
   programs.zsh.enable = true;
 
+  programs.steam = {
+    enable = true;
+  };
+
   networking.networkmanager.enable = true;
   networking.firewall.enable = false;
 
@@ -52,6 +56,11 @@
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.modesetting.enable = true; # important for Wayland
   boot.blacklistedKernelModules = [ "nouveau" ];
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = false;
+  };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
