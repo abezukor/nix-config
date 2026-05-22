@@ -65,6 +65,15 @@ in
     userSettings = {
       soft_wrap = "editor_width";
 
+      languages = {
+        Nix = {
+          language_servers = [
+            "nixd"
+            "!nil"
+          ];
+        };
+      };
+
       agent_servers = {
         claude = { };
         "codex-acp" = {
