@@ -61,12 +61,21 @@
       mdk_deploy() {
         docker exec -it mdk_home_abe_matic bash -c "cd rust && cargo run --release -p deploy -- $@"
       }
+      rcm_ssh() {
+        IFACE="''${1}"
+        shift
+        ssh "root@fe80::1%matic_''${IFACE}" "$@"
+      }
+      dd_ssh() {
+        pushd ~/matic/rust
+        cargo run --release --example=debug_conn_v3 -- fuji ssh -- "$@"
+        popd
+      }
     '';
     shellAliases = {
       mdke = "docker exec -it mdk_home_abe_matic";
       mdk_bzl = "docker exec -it mdk_home_abe_matic ./tools/bazel";
       mdk_bzl_bot = "docker exec -it mdk_home_abe_matic ./tools/bazel build -c opt --config=jetson_orin";
-      dd_ssh = "(cd ~/matic/rust && cargo run --release --example=debug_conn_v3 -- fuji ssh)";
     };
   };
 }
