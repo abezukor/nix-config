@@ -43,6 +43,7 @@
 
   programs.ssh.matchBlocks = {
     "*" = {
+      user = "abe";
       extraOptions = {
         StrictHostKeyChecking = "no";
       };

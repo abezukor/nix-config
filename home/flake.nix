@@ -27,24 +27,57 @@
         inherit system;
         config.allowUnfree = true;
       };
+
+      # Build a Home Manager configuration for a specific host + user.
+      # Keyed as "${host}-${user}" so multiple users can coexist on the same machine.
+      mkHome =
+        {
+          host,
+          user,
+          modules,
+          homeDirectory ? "/home/${user}",
+        }:
+        home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = {
+            inherit
+              pkgs-unstable
+              host
+              user
+              homeDirectory
+              ;
+          };
+          inherit modules;
+        };
     in
     {
       homeConfigurations = {
-        abeMaticDesktop = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = { inherit pkgs-unstable; };
+        # Example: use `home-manager switch --flake ~/.config/home-manager#$(hostname)-$USER`
+        abeMaticDesktop-abe = mkHome {
+          host = "abeMaticDesktop";
+          user = "abe";
           modules = [
             ./cli.nix
             ./gui.nix
             ./work.nix
           ];
         };
-        abeDesktop = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = { inherit pkgs-unstable; };
+
+        abeDesktop-abe = mkHome {
+          host = "abeDesktop";
+          user = "abe";
           modules = [
             ./cli.nix
             ./gui.nix
+          ];
+        };
+        abeDesktop-abematic = mkHome {
+          host = "abeDesktop";
+          user = "abematic";
+          modules = [
+            ./cli.nix
+            ./gui.nix
+            ./work.nix
           ];
         };
       };

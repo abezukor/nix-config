@@ -33,6 +33,18 @@
       extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
       shell = pkgs.zsh;
     };
+    abematic = {
+      isNormalUser = true;
+      extraGroups = [
+        "wheel"
+        "docker"
+        "libvirtd"
+        "adbusers"
+      ]; # Enable ‘sudo’ for the user.
+      shell = pkgs.zsh;
+      home = "/home/abematic";
+      createHome = true;
+    };
   };
 
   environment.systemPackages = with pkgs; [
@@ -40,6 +52,7 @@
     wayland-utils
     wget
   ];
+
   programs.zsh.enable = true;
 
   programs.steam = {

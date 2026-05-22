@@ -2,8 +2,14 @@
   pkgs,
   pkgs-unstable,
   config,
+  user ? null,
+  homeDirectory ? null,
   ...
 }:
+let
+  username = if user != null then user else "abe";
+  homeDir = if homeDirectory != null then homeDirectory else "/home/${username}";
+in
 {
   nixpkgs.config.allowUnfree = true;
 
@@ -30,8 +36,8 @@
       sccache
     ];
 
-    username = "abe";
-    homeDirectory = "/home/abe";
+    username = username;
+    homeDirectory = homeDir;
 
     sessionVariables = {
       RUSTC_WRAPPER = "sccache";
@@ -61,8 +67,8 @@
     shellAliases = {
       rsyncf = "rsync -zhPLa";
       # Nix Aliases
-      nfu = "sudo nixos-rebuild --flake /etc/nixos switch";
-      hmfu = "home-manager switch --flake ~/.config/home-manager#$(hostname)";
+      nfu = "sudo nixos-rebuild --flake ~/abe-nix/system switch";
+      hmfu = "home-manager switch --flake ~/.config/home-manager#$(hostname)-$USER";
       cat = "bat";
       ls = "eza -lh";
       nix-shell = "nix-shell --run $SHELL";
@@ -84,7 +90,7 @@
       cat = "bat";
     };
     extraConfig = ''
-      def hmfu [] { home-manager switch --flake $"($env.HOME)/.config/home-manager#(hostname)" }
+      def hmfu [] { home-manager switch --flake $"($env.HOME)/.config/home-manager#(hostname)-($env.USER)" }
 
       # Parse AWS credentials from text and set environment variables
       def --env aws-creds [...text: string] {
