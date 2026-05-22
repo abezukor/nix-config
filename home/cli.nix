@@ -35,7 +35,6 @@ in
       tio
       xxd
       usbutils
-      claude-code
       sccache
     ];
 
