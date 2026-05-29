@@ -41,6 +41,8 @@
   };
   nixpkgs.config.allowUnfree = true;
 
+  programs.git.settings.user.email = "abe@maticrobots.com";
+
   programs.ssh.matchBlocks = {
     "*" = {
       user = "abe";

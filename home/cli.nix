@@ -24,7 +24,6 @@ in
   home = {
     packages = with pkgs; [
       zsh
-      git
       htop
       eza
       nixd
@@ -142,6 +141,14 @@ in
   programs.htop.settings = {
     hide_kernel_threads = true;
     hide_userland_threads = true;
+  };
+
+  programs.git = {
+    enable = true;
+    settings = {
+      user.name = "Abraham Zukor";
+      push.autoSetupRemote = true;
+    };
   };
 
   programs.mergiraf.enable = true;
