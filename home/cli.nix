@@ -27,7 +27,7 @@ in
       htop
       eza
       nixd
-      nixfmt-rfc-style
+      nixfmt
       tmux
       bat
       eza
@@ -151,17 +151,20 @@ in
     };
   };
 
-  programs.mergiraf.enable = true;
+  programs.mergiraf = {
+    enable = true;
+    enableGitIntegration = true;
+  };
 
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    matchBlocks = {
+    settings = {
       "*" = {
-        forwardAgent = true;
-        addKeysToAgent = "yes";
-        serverAliveInterval = 3;
-        hashKnownHosts = false;
+        ForwardAgent = true;
+        AddKeysToAgent = "yes";
+        ServerAliveInterval = 3;
+        HashKnownHosts = false;
       };
     };
   };

@@ -76,7 +76,6 @@
       "wheel"
       "docker"
       "libvirtd"
-      "adbusers"
     ]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh;
     #shell = pkgs.nushell;
@@ -84,6 +83,7 @@
 
   fileSystems."/home/abe/.cache" = {
     device = "/var/cache/home/abe/.cache";
+    fsType = "none";
     options = [ "bind" ];
   };
 
@@ -114,11 +114,9 @@
     #reflector = true;
   };
 
-  services.resolved = {
-    extraConfig = ''
-      MulticastDNS=no
-      ResolveUnicastSingleLabel=yes
-    '';
+  services.resolved.settings.Resolve = {
+    MulticastDNS = "no";
+    ResolveUnicastSingleLabel = "yes";
   };
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

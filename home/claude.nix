@@ -3,7 +3,7 @@
   programs.claude-code = {
     enable = true;
     package = pkgs-unstable.claude-code;
-    memory.text = ''
+    context = ''
       # Environment
 
       This machine runs **NixOS**. Most tools are not installed globally on

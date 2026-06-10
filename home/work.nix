@@ -43,18 +43,16 @@
 
   programs.git.settings.user.email = "abe@maticrobots.com";
 
-  programs.ssh.matchBlocks = {
+  programs.ssh.settings = {
     "*" = {
-      user = "abe";
-      extraOptions = {
-        StrictHostKeyChecking = "no";
-      };
+      User = "abe";
+      StrictHostKeyChecking = "no";
     };
     "matic-* fuji-*" = {
-      user = "root";
+      User = "root";
     };
     "zeus ci* bigloo" = {
-      user = "admin";
+      User = "admin";
     };
   };
 

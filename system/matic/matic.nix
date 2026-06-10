@@ -22,5 +22,5 @@ in
     };
     linkConfig.RequiredForOnline = "no";
   };
-  programs.adb.enable = true;
+  environment.systemPackages = [ pkgs.android-tools ];
 }
