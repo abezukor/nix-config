@@ -21,12 +21,13 @@
       ...
     }:
     let
-      system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
-      pkgs-unstable = import nixpkgs-unstable {
-        inherit system;
-        config.allowUnfree = true;
-      };
+      mkPkgs = system: import nixpkgs { inherit system; };
+      mkPkgsUnstable =
+        system:
+        import nixpkgs-unstable {
+          inherit system;
+          config.allowUnfree = true;
+        };
 
       # Build a Home Manager configuration for a specific host + user.
       # Keyed as "${host}-${user}" so multiple users can coexist on the same machine.
@@ -35,8 +36,20 @@
           host,
           user,
           modules,
-          homeDirectory ? "/home/${user}",
+          system ? "x86_64-linux",
+          homeDirectory ? null,
         }:
+        let
+          pkgs = mkPkgs system;
+          pkgs-unstable = mkPkgsUnstable system;
+          homeDir =
+            if homeDirectory != null then
+              homeDirectory
+            else if pkgs.stdenv.isDarwin then
+              "/Users/${user}"
+            else
+              "/home/${user}";
+        in
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = {
@@ -44,8 +57,8 @@
               pkgs-unstable
               host
               user
-              homeDirectory
               ;
+            homeDirectory = homeDir;
           };
           inherit modules;
         };
@@ -58,6 +71,7 @@
           user = "abe";
           modules = [
             ./cli.nix
+            ./cli-linux.nix
             ./gui.nix
             ./work.nix
             ./claude.nix
@@ -69,6 +83,7 @@
           user = "abe";
           modules = [
             ./cli.nix
+            ./cli-linux.nix
             ./gui.nix
             ./codex.nix
           ];
@@ -78,7 +93,20 @@
           user = "abematic";
           modules = [
             ./cli.nix
+            ./cli-linux.nix
             ./gui.nix
+            ./work.nix
+            ./claude.nix
+          ];
+        };
+
+        # Mac mini (Apple Silicon) — standalone Home Manager, no Linux modules.
+        PlatformTeamMini-abe = mkHome {
+          host = "PlatformTeamMini";
+          user = "abe";
+          system = "aarch64-darwin";
+          modules = [
+            ./cli.nix
             ./work.nix
             ./claude.nix
           ];

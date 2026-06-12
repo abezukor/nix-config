@@ -33,7 +33,6 @@ in
       eza
       tio
       xxd
-      usbutils
       sccache
     ];
 
@@ -168,7 +167,6 @@ in
       };
     };
   };
-  services.ssh-agent.enable = true;
 
   programs.atuin = {
     enable = true;
