@@ -73,6 +73,7 @@
             ./cli.nix
             ./cli-linux.nix
             ./gui.nix
+            ./gui-linux.nix
             ./work.nix
             ./claude.nix
           ];
@@ -85,6 +86,7 @@
             ./cli.nix
             ./cli-linux.nix
             ./gui.nix
+            ./gui-linux.nix
             ./codex.nix
           ];
         };
@@ -95,6 +97,7 @@
             ./cli.nix
             ./cli-linux.nix
             ./gui.nix
+            ./gui-linux.nix
             ./work.nix
             ./claude.nix
           ];
@@ -107,6 +110,7 @@
           system = "aarch64-darwin";
           modules = [
             ./cli.nix
+            ./gui.nix
             ./work.nix
             ./claude.nix
           ];
