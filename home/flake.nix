@@ -104,12 +104,13 @@
         };
 
         # Mac mini (Apple Silicon) — standalone Home Manager, no Linux modules.
-        PlatformTeamMini-abe = mkHome {
-          host = "PlatformTeamMini";
+        Platform-Team-Mac-Mini-abe = mkHome {
+          host = "Platform-Team-Mac-Mini";
           user = "abe";
           system = "aarch64-darwin";
           modules = [
             ./cli.nix
+            ./cli-darwin.nix
             ./gui.nix
             ./work.nix
             ./claude.nix

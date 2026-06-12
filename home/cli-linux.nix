@@ -1,5 +1,9 @@
 { pkgs, ... }:
 {
+  programs.zsh.shellAliases = {
+    hmfu = "home-manager switch --flake ~/.config/home-manager#$(hostname)-$USER";
+  };
+
   # Linux-only pieces of the shared CLI environment. Imported alongside
   # cli.nix on Linux hosts; omitted on Darwin where these don't build/apply.
   home.packages = with pkgs; [

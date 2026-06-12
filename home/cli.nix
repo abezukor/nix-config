@@ -71,7 +71,6 @@ in
       rsyncf = "rsync -zhPLa";
       # Nix Aliases
       nfu = "sudo nixos-rebuild --flake ~/abe-nix/system switch";
-      hmfu = "home-manager switch --flake ~/.config/home-manager#$(hostname)-$USER";
       cat = "bat";
       ls = "eza -lh";
       nix-shell = "nix-shell --run $SHELL";
