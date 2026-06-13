@@ -65,9 +65,11 @@
   hardware.nvidia = {
     open = false;
     powerManagement.enable = true;
+    modesetting.enable = true;
+
+    package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
   };
   services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.modesetting.enable = true; # important for Wayland
   boot.blacklistedKernelModules = [ "nouveau" ];
 
   hardware.bluetooth = {
