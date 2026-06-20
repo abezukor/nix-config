@@ -30,7 +30,10 @@
   users.users = {
     abe = {
       isNormalUser = true;
-      extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+      extraGroups = [
+        "wheel"
+        "docker"
+      ];
       shell = pkgs.zsh;
     };
     abematic = {
@@ -38,8 +41,6 @@
       extraGroups = [
         "wheel"
         "docker"
-        "libvirtd"
-        "adbusers"
       ]; # Enable ‘sudo’ for the user.
       shell = pkgs.zsh;
       home = "/home/abematic";
@@ -78,6 +79,8 @@
   };
 
   services.tailscale.enable = true;
+
+  virtualisation.docker.enable = true;
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

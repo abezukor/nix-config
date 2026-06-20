@@ -76,6 +76,7 @@ in
       cat = "bat";
       ls = "eza -lh";
       nix-shell = "nix-shell --run $SHELL";
+      tailscale = "sudo tailscale";
     };
     history.size = 10000;
 
