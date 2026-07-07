@@ -77,6 +77,7 @@ in
       ls = "eza -lh";
       nix-shell = "nix-shell --run $SHELL";
       tailscale = "sudo tailscale";
+      aws = "aws --no-cli-pager";
     };
     history.size = 10000;
 
