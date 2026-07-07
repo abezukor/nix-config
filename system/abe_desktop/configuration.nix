@@ -78,6 +78,8 @@
     powerOnBoot = false;
   };
 
+  boot.tmp.useTmpfs = true;
+
   services.tailscale.enable = true;
 
   virtualisation.docker.enable = true;
