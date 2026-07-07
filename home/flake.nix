@@ -61,6 +61,7 @@
             ./gui.nix
             ./work.nix
             ./claude.nix
+            ./codex.nix
           ];
         };
 
