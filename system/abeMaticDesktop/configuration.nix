@@ -95,7 +95,6 @@
     wget
     smartmontools
   ];
-  programs.kdeconnect.enable = true;
   programs.zsh.enable = true;
   programs.virt-manager.enable = true;
 
