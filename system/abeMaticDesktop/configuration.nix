@@ -117,6 +117,17 @@
     MulticastDNS = "no";
     ResolveUnicastSingleLabel = "yes";
   };
+
+  services.openssh = {
+    enable = true;
+    settings = {
+      AuthenticationMethods = "publickey";
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PubkeyAuthentication = true;
+    };
+  };
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
