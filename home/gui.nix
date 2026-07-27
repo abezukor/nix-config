@@ -51,6 +51,20 @@ in
     configPath = "${config.xdg.configHome}/mozilla/firefox";
   };
 
+  services.flatpak = {
+    enable = true;
+    packages = [
+      rec {
+        appId = "org.adi.Scopy";
+        sha256 = "sha256-2b+tFmMErkoXbxiqi/sToxuDMi4SSM6Qhim1AEUT568=";
+        bundle = "${pkgs.fetchurl {
+          url = "https://github.com/analogdevicesinc/scopy/releases/download/v2.2.1/Scopy-v2.2.1-Linux-x86_64.flatpak";
+          inherit sha256;
+        }}";
+      }
+    ];
+  };
+
   programs.zed-editor = {
     enable = true;
     package = pkgs-unstable.zed-editor;
