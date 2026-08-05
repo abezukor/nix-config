@@ -20,10 +20,21 @@ let
         --set GDK_BACKEND x11
     '';
   };
+
+  # Firefox 153 has a Wayland rendering regression (Mozilla bug 2049922)
+  # which can make browser chrome text disappear. The desktop file launches
+  # Firefox by name, so this higher-priority wrapper covers both application
+  # launches and terminal launches without changing the backend for other apps.
+  firefox-x11 = lib.hiPrio (
+    pkgs.writeShellScriptBin "firefox" ''
+      exec env GDK_BACKEND=x11 ${config.programs.firefox.finalPackage}/bin/firefox "$@"
+    ''
+  );
 in
 {
   home = {
     packages = [
+      firefox-x11
       # For Zed
       # Run Zed's Codex ACP adapter natively on NixOS (avoid Zed-downloaded dynamic binaries).
       pkgs-unstable.starpls

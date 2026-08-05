@@ -35,6 +35,8 @@ in
       xxd
       usbutils
       sccache
+      # All my terminal emulators support images, let be display them
+      timg
     ];
 
     username = username;
