@@ -64,11 +64,9 @@
   networking.firewall.enable = false;
 
   hardware.nvidia = {
-    open = false;
+    open = true;
     powerManagement.enable = true;
     modesetting.enable = true;
-
-    package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
   };
   services.xserver.videoDrivers = [ "nvidia" ];
   boot.blacklistedKernelModules = [ "nouveau" ];
