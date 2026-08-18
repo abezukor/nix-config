@@ -65,6 +65,22 @@ in
     configPath = "${config.xdg.configHome}/mozilla/firefox";
   };
 
+  # Keep baloo from indexing the cache dirs, and restrict it to filename-only
+  # indexing. Content indexing respawned baloo_file_extractor ~90x/hour against
+  # a 7.5 GiB index because dev build output under $HOME churns constantly;
+  # each respawn maps the whole index and loads every extractor plugin.
+  #
+  # Set these keys imperatively rather than via xdg.configFile: KDE writes
+  # baloofilerc at runtime, so a read-only store symlink would break System
+  # Settings and clobber the large default "exclude filters" list.
+  home.activation.balooSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    run ${pkgs.kdePackages.kconfig}/bin/kwriteconfig6 --file baloofilerc \
+      --group General --key "exclude folders" \
+      "${config.home.homeDirectory}/.cache/,/var/cache/"
+    run ${pkgs.kdePackages.kconfig}/bin/kwriteconfig6 --file baloofilerc \
+      --group General --key "only basic indexing" true
+  '';
+
   services.flatpak = {
     enable = true;
     packages = [
