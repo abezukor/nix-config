@@ -71,6 +71,15 @@
         cargo run --release --example=debug_conn_v3 -- fuji ssh -- "$@"
         popd
       }
+      aws_profile() {
+        AWS_PROFILE="$1"
+        if [[ -n $AWS_PROFILE ]]; then
+          export AWS_PROFILE
+        else
+          echo "Valid profiles MaticianAdmin|BotData|MaticianEngineering|MaticianRO|MaticianProductionAdmin|MaticianProductionRO|MaticianTestingAdmin|MaticianTestingRO"
+          false
+        fi
+      }
     '';
     shellAliases = {
       mdke = "docker exec -it mdk_home_abe_matic";
