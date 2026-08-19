@@ -169,6 +169,11 @@ in
         AddKeysToAgent = "yes";
         ServerAliveInterval = 3;
         HashKnownHosts = false;
+        # Reuse a single TCP connection per host so slow (~10s) auth only
+        # happens once; later sessions ride the existing master.
+        ControlMaster = "auto";
+        ControlPath = "/tmp/ssh-%C";
+        ControlPersist = "10m";
       };
     };
   };
