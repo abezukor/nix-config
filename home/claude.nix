@@ -22,6 +22,21 @@
 
       Never suggest `apt`, `brew`, `pip install --user`, or other non-Nix
       package managers to resolve missing commands on this system.
+
+      ## Devshells
+
+      Prefer a project's own devshell over ad-hoc `nix-shell -p`. Before
+      concluding a command is missing, check the project root for
+      `flake.nix`, `shell.nix`, or `.envrc`.
+
+      If `.envrc` exists, the shell is cached by direnv — but the direnv
+      hook does not fire in non-interactive shells, so run commands as:
+
+      - `direnv exec . <cmd>` — run inside the cached devshell
+      - `nix develop -c <cmd>` — if there is a `flake.nix` but no `.envrc`
+
+      Fall back to `nix-shell -p <pkg>` only when the tool does not belong
+      to the project.
     '';
   };
   programs.zed-editor.userSettings.agent_servers.claude = { };
