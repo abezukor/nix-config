@@ -31,3 +31,6 @@ hook does not fire in non-interactive shells, so run commands as:
 
 Fall back to `nix-shell -p <pkg>` only when the tool does not belong
 to the project.
+
+# AWS
+When AWS login is needed, try using the pre-configured AWS profiles. Let the user know if they need to run `aws sso login` to re-authenticate.
