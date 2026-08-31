@@ -14,6 +14,8 @@ in
       # Image paste (ctrl+v) in the Claude Code CLI shells out to wl-paste to
       # read image data off the clipboard.
       pkgs.wl-clipboard
+      # Codex really seems to expect ripgrep to be available
+      pkgs.ripgrep
     ];
   };
   programs.codex = {
