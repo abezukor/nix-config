@@ -91,9 +91,12 @@
     "iommu=pt"
   ];
 
-  boot.binfmt.emulatedSystems = [
-    "aarch64-linux"
-  ];
+  boot.binfmt = {
+    preferStaticEmulators = true;
+    emulatedSystems = [
+      "aarch64-linux"
+    ];
+  };
 
   nix.settings.experimental-features = [
     "nix-command"
