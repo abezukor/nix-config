@@ -63,9 +63,9 @@
             ./cli.nix
             ./gui.nix
             ./work.nix
-            ./claude.nix
-            ./codex.nix
-            ./t3code.nix
+            ./llm/claude.nix
+            ./llm/codex.nix
+            ./llm/t3code.nix
           ];
         };
 
@@ -75,7 +75,7 @@
           modules = [
             ./cli.nix
             ./gui.nix
-            ./codex.nix
+            ./llm/codex.nix
           ];
         };
         abeDesktop-abematic = mkHome {
@@ -85,7 +85,7 @@
             ./cli.nix
             ./gui.nix
             ./work.nix
-            ./claude.nix
+            ./llm/claude.nix
           ];
         };
       };

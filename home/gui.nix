@@ -35,14 +35,7 @@ in
       libreoffice-light
       pkgs.hunspell
       pkgs.hunspellDicts.en_US-large
-      # Image paste (ctrl+v) in the Claude Code CLI shells out to wl-paste to
-      # read image data off the clipboard.
-      pkgs.wl-clipboard
     ];
-
-    # Tell the Zed-bundled claude-agent-sdk to use the Nix-installed claude
-    # binary instead of its own dynamically-linked one (which can't run on NixOS).
-    sessionVariables.CLAUDE_CODE_EXECUTABLE = lib.getExe pkgs-unstable.claude-code;
 
     # You do not need to change this if you're reading this in the future.
     # Don't ever change this after the first build.  Don't ask questions.
