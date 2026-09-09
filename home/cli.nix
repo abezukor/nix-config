@@ -2,6 +2,7 @@
   pkgs,
   pkgs-unstable,
   config,
+  kachePackage,
   user ? null,
   homeDirectory ? null,
   ...
@@ -34,7 +35,7 @@ in
       tio
       xxd
       usbutils
-      sccache
+      kachePackage
       # All my terminal emulators support images, let be display them
       timg
     ];
@@ -43,16 +44,27 @@ in
     homeDirectory = homeDir;
 
     sessionVariables = {
-      RUSTC_WRAPPER = "sccache";
-      SCCACHE_DIR = "${config.home.homeDirectory}/.cache/sccache";
-      SCCACHE_CACHE_SIZE = "300G";
-      SCCACHE_SERVER_UDS = "$XDG_RUNTIME_DIR/sccache.sock";
+      RUSTC_WRAPPER = "${kachePackage}/bin/kache";
     };
+
+    # Cargo computes a separate cache path for every workspace, including new
+    # worktrees created by tools. Final artifacts stay in the workspace target/.
+    file.".cargo/config.toml".text = ''
+      [build]
+      build-dir = "${config.home.homeDirectory}/.cache/cargo-build/{workspace-path-hash}"
+      rustc-wrapper = "${kachePackage}/bin/kache"
+    '';
 
     # You do not need to change this if you're reading this in the future.
     # Don't ever change this after the first build.  Don't ask questions.
     stateVersion = "25.05";
   };
+
+  xdg.configFile."kache/config.toml".text = ''
+    [cache]
+    local_store = "${config.home.homeDirectory}/.cache/kache"
+    local_max_size = "300GB"
+  '';
 
   programs.direnv = {
     enable = true;

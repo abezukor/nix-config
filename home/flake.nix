@@ -13,6 +13,7 @@
     };
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/v0.7.0";
+    kache.url = "github:kunobi-ninja/kache/stable";
   };
 
   outputs =
@@ -21,6 +22,7 @@
       nixpkgs-unstable,
       home-manager,
       nix-flatpak,
+      kache,
       ...
     }:
     let
@@ -43,6 +45,7 @@
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = {
+            kachePackage = kache.packages.${system}.default;
             inherit
               pkgs-unstable
               host
