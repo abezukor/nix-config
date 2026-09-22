@@ -23,7 +23,7 @@ If `.envrc` exists, the shell is cached by direnv — but the direnv hook does n
   - If working inside a worktree and you have not changed the nix flake, direnv exec inside the root worktree to avoid regenerating the devshell.
 - `nix develop -c <cmd>` — if there is a `flake.nix` but no `.envrc`
 
-Fall back to `nix-shell -p <pkg>` only when the tool does not belong to the project.
+Fall back to `nix-shell -p <pkg>` only when the tool does not belong to the project. If you find you need an ad-hoc devshell repeatedly, make a flake.nix and direnv in a subfolder of /tmp.
 
 # AWS
 When AWS login is needed, try using the pre-configured AWS profiles. Let the user know if they need to run `aws sso login` to re-authenticate.

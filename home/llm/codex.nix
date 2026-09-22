@@ -25,7 +25,7 @@ in
   };
   programs.zed-editor.userSettings.agent_servers."codex-acp" = {
     type = "custom";
-    command = lib.getExe pkgs.codex-acp;
+    command = lib.getExe pkgs-unstable.codex-acp;
     args = [ ];
     default_model = "gpt-6-astra";
   };
