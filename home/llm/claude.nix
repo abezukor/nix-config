@@ -9,6 +9,8 @@
       # Image paste (ctrl+v) in the Claude Code CLI shells out to wl-paste to
       # read image data off the clipboard.
       pkgs.wl-clipboard
+      # Claude needs bwrap for its sandbox to work
+      pkgs.bubblewrap
     ];
   };
   programs.claude-code = {

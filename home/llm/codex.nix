@@ -27,6 +27,6 @@ in
     type = "custom";
     command = lib.getExe pkgs.codex-acp;
     args = [ ];
-    default_model = "gpt-5.6-sol";
+    default_model = "gpt-6-astra";
   };
 }
