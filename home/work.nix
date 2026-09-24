@@ -19,7 +19,8 @@
                   "/var/cache/bazel_output_user_root:/var/cache/bazel_output_user_root",
                   "~/.bazelrc:/home/maticd/.bazelrc",
                   "~/mdk_shared:/home/maticd/mdk_shared",
-                  "~/.ssh:/home/maticd/.ssh"
+                  "~/.ssh:/home/maticd/.ssh",
+                  "~/.t3/worktrees/matic:/home/maticd/t3-matic-worktrees"
               ]
           }
         '';
