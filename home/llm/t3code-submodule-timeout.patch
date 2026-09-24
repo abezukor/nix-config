@@ -1,0 +1,16 @@
+--- a/apps/server/src/vcs/GitVcsDriverCore.ts
++++ b/apps/server/src/vcs/GitVcsDriverCore.ts
+@@ -2895,7 +2895,7 @@
+-      yield* runGit("GitVcsDriver.createWorktree.updateSubmodules", worktreePath, [
+-        "submodule",
+-        "update",
+-        "--init",
+-        "--recursive",
+-      ]).pipe(
++      yield* runGit(
++        "GitVcsDriver.createWorktree.updateSubmodules",
++        worktreePath,
++        ["submodule", "update", "--init", "--recursive"],
++        { timeoutMs: 10 * 60 * 1000 },
++      ).pipe(
+         Effect.catch((cause) =>

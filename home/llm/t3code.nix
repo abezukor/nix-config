@@ -23,7 +23,13 @@ in
 {
   programs.t3code = {
     enable = true;
-    package = pkgs-unstable.t3code;
+    package = pkgs-unstable.t3code.override {
+      t3code-unwrapped = pkgs-unstable.t3code.unwrapped.overrideAttrs {
+        patches = [
+          ./t3code-submodule-timeout.patch
+        ];
+      };
+    };
   };
 
   # Run the server headlessly so the web UI is always reachable at
