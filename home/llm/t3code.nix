@@ -47,6 +47,11 @@ in
       Environment = [ "PATH=${servicePath}" ];
       Restart = "on-failure";
       RestartSec = 5;
+      # Agent tool calls crash routinely. RLIMIT_CORE=1 is a kernel special case
+      # that skips the core_pattern pipe entirely, so these never reach
+      # systemd-coredump and DrKonqi doesn't pop up a notification. (0 isn't
+      # enough: systemd-coredump still logs the crash and DrKonqi still notifies.)
+      LimitCORE = 1;
     };
 
     Install.WantedBy = [ "default.target" ];

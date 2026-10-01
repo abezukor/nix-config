@@ -259,6 +259,8 @@
   # remove a serial port; CI2PCIE/scripts/jtag_setup.sh does it.
   services.udev.extraRules = ''
     SUBSYSTEM=="usb", ATTR{idVendor}=="0403", ATTR{idProduct}=="6010", MODE="0666", TAG+="uaccess"
+    # Gowin GWU2X USB-JTAG (onboard debugger on Gowin dev kits).
+    SUBSYSTEM=="usb", ATTR{idVendor}=="33aa", ATTR{idProduct}=="0120", MODE="0666", TAG+="uaccess"
   '';
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
