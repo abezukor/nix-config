@@ -33,7 +33,8 @@
     };
 
     sessionVariables = {
-      ABE_BOT = "matic-07m-acwz7n";
+      ABE_HOME_BOT = "matic-07m-acwz7n";
+      ABE_BOT = "matic-3c-4ptvv";
     };
 
     # You do not need to change this if you're reading this in the future.
