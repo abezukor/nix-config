@@ -2,7 +2,6 @@
   pkgs,
   pkgs-unstable,
   config,
-  kachePackage,
   user ? null,
   homeDirectory ? null,
   ...
@@ -35,7 +34,7 @@ in
       tio
       xxd
       usbutils
-      kachePackage
+      pkgs-unstable.kache
       # All my terminal emulators support images, let be display them
       timg
     ];
@@ -44,7 +43,7 @@ in
     homeDirectory = homeDir;
 
     sessionVariables = {
-      RUSTC_WRAPPER = "${kachePackage}/bin/kache";
+      RUSTC_WRAPPER = "${pkgs-unstable.kache}/bin/kache";
     };
 
     # Cargo computes a separate cache path for every workspace, including new
@@ -52,7 +51,7 @@ in
     file.".cargo/config.toml".text = ''
       [build]
       build-dir = "${config.home.homeDirectory}/.cache/cargo-build/{workspace-path-hash}"
-      rustc-wrapper = "${kachePackage}/bin/kache"
+      rustc-wrapper = "${pkgs-unstable.kache}/bin/kache"
     '';
 
     # You do not need to change this if you're reading this in the future.
