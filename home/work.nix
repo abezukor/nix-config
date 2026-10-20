@@ -1,7 +1,11 @@
 { pkgs, ... }:
 {
   home = {
-    packages = with pkgs; [ slack ];
+    packages = with pkgs; [
+      slack
+      # For remote desktop (e.g macmatic)
+      kdePackages.krdc
+    ];
 
     file = {
       ".config/mdk/mdk.json" = {
