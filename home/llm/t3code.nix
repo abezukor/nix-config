@@ -29,6 +29,7 @@ in
   # Run the server headlessly so the web UI is always reachable at
   # http://127.0.0.1:3773; `t3code-desktop` remains available for the GUI.
   # Pairing details are printed to the journal: `journalctl --user -u t3code`.
+  # Remove once upstream https://github.com/NixOS/nixpkgs/pull/566470 is merged
   systemd.user.services.t3code = {
     Unit = {
       Description = "T3 Code server";
