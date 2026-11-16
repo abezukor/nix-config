@@ -76,6 +76,7 @@
             ./cli.nix
             ./gui.nix
             ./llm/codex.nix
+            ./tailscale.nix
           ];
         };
         abeDesktop-abematic = mkHome {
@@ -86,6 +87,7 @@
             ./gui.nix
             ./work.nix
             ./llm/claude.nix
+            ./tailscale.nix
           ];
         };
       };
