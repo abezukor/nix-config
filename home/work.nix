@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, pkgs-unstable, ... }:
 {
   home = {
     packages = with pkgs; [
-      slack
+      pkgs-unstable.slack
       # For remote desktop (e.g macmatic)
       kdePackages.krdc
     ];
